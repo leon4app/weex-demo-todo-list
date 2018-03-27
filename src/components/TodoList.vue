@@ -1,36 +1,42 @@
 <template>
   <list @loadmore="fetch" loadmoreoffset="10">
-    <cell v-for="(num, i) in lists" :key="i">
+    <cell v-for="(item, i) in todoLists" :key="i" @click="click(item, i)">
       <div class="panel">
-        <text class="text">{{num}}</text>
+        <text class="text">{{item}}</text>
       </div>
     </cell>
   </list>
 </template>
 
 <script>
-  const modal = weex.requireModule('modal')
-  const LOADMORE_COUNT = 4
+const modal = weex.requireModule('modal')
+const LOADMORE_COUNT = 4
 
-  export default {
-    data () {
-      return {
-        lists: [1, 2, 3, 4, 5]
-      }
+export default {
+  data () {
+    return {
+      todoLists: [1, 2, 3, 4, 5],
+      finishedLists: []
+    }
+  },
+  methods: {
+    fetch (event) {
+      modal.toast({ message: 'loadmore', duration: 1 })
+
+      setTimeout(() => {
+        const length = this.todoLists.length
+        for (let i = length; i < length + LOADMORE_COUNT; ++i) {
+          this.todoLists.push(i + 1)
+        }
+      }, 800)
     },
-    methods: {
-      fetch (event) {
-        modal.toast({ message: 'loadmore', duration: 1 })
-
-        setTimeout(() => {
-          const length = this.lists.length
-          for (let i = length; i < length + LOADMORE_COUNT; ++i) {
-            this.lists.push(i + 1)
-          }
-        }, 800)
-      }
+    click (item, i) {
+      modal.toast({ message: 'Good', duration: 1 })
+      this.finishedLists.push(item)
+      this.todoLists.splice(i, 1)
     }
   }
+}
 </script>
 
 <style scoped>
