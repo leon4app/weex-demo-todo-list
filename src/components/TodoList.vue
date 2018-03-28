@@ -3,15 +3,16 @@
     <wxc-minibar  title="标题"
                   background-color="#009ff0"
                   text-color="#FFFFFF"
-                  leftButton=""
-                  right-text="+"
-                  @wxcMinibarRightButtonClicked="minibarRightButtonClick">
+                  leftButton="">
       <input  slot="middle"
               class="input"
               @focus="onFocus"
               @input="onInput"
               @change="onChange"
               placeholder="Add Todo"/>
+      <text slot="right"
+            class="add"
+            @click="minibarRightButtonClick">+</text>
     </wxc-minibar>
     <list @loadmore="fetch" loadmoreoffset="0">
       <cell v-for="(item, i) in todoLists" :key="i" @click="click(item, i)">
@@ -30,6 +31,9 @@
     flex: 1;
     border-radius: 20px;
     background-color: white;
+  }
+  .add {
+    font-size: 60px;
   }
   .panel {
     /* width: 600px; */
