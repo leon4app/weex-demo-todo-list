@@ -1,5 +1,5 @@
 <template>
- <TodoList/>
+  <TodoList/>
 </template>
 
 <script>
@@ -23,10 +23,7 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  .logo {
-    width: 424px;
-    height: 200px;
-  }
+
   .greeting {
     text-align: center;
     margin-top: 70px;
