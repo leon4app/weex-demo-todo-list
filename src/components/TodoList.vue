@@ -1,6 +1,6 @@
 <template>
   <div>
-    <wxc-minibar style="" 
+    <wxc-minibar style="position: fixed; z-index: 900"
                   title="标题"
                   background-color="#009ff0"
                   text-color="#FFFFFF"
@@ -9,7 +9,8 @@
                   @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
                   @wxcMinibarRightButtonClicked="minibarRightButtonClick">
     </wxc-minibar>
-    <list @loadmore="fetch" loadmoreoffset="10" style="">
+    <div style="height:90px;"></div> 
+    <list @loadmore="fetch" loadmoreoffset="10">
       <cell v-for="(item, i) in todoLists" :key="i" @click="click(item, i)">
         <div class="panel">
           <text class="text">{{item}}</text>
