@@ -26,7 +26,7 @@
     <text class="title">已经完成
     </text>
     <list @loadmore="fetch" loadmoreoffset="0">
-      <cell v-for="(item, i) in finishedLists" :key="i" @click="click(item, i)">
+      <cell v-for="(item, i) in finishedLists" :key="i">
         <div class="panel">
           <text class="text">{{item}}</text>
         </div>
