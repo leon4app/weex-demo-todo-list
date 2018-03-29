@@ -17,7 +17,7 @@
     <text class="title">正在进行
     </text>
     <list @loadmore="fetch" loadmoreoffset="0">
-      <cell v-for="(item, i) in todoLists" :key="i" @click="click(item, i)">
+      <cell v-for="(item, i) in todoList" :key="i" @click="click(item, i)">
         <div class="panel">
           <text class="text">{{item}}</text>
         </div>
@@ -26,7 +26,7 @@
     <text class="title">已经完成
     </text>
     <list @loadmore="fetch" loadmoreoffset="0">
-      <cell v-for="(item, i) in finishedLists" :key="i">
+      <cell v-for="(item, i) in finishedList" :key="i">
         <div class="panel">
           <text class="text">{{item}}</text>
         </div>
@@ -83,28 +83,28 @@ export default {
   data () {
     return {
       txtInput: '',
-      todoLists: [1, 2, 3, 4, 5],
-      finishedLists: []
+      todoList: [1, 2, 3, 4, 5],
+      finishedList: []
     }
   },
   methods: {
     fetch (event) {
       // modal.toast({ message: 'loadmore', duration: 1 })
       setTimeout(() => {
-        // const length = this.todoLists.length
+        // const length = this.todoList.length
         // for (let i = length; i < length + LOADMORE_COUNT; ++i) {
-          // this.todoLists.push(i + 1)
+          // this.todoList.push(i + 1)
         // }                                                                                          
       }, 800)
     },
     click (item, i) {
       modal.toast({ message: 'Good', duration: 1 })
-      this.finishedLists.push(item)
-      this.todoLists.splice(i, 1)
+      this.finishedList.push(item)
+      this.todoList.splice(i, 1)
     },
     minibarRightButtonClick () {
       if (this.txtInput) {
-        this.todoLists.push(this.txtInput)
+        this.todoList.push(this.txtInput)
         modal.toast({ 'message': '添加成功!', 'duration': 1 })
       }
     },
