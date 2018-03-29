@@ -14,8 +14,19 @@
             class="add"
             @click="minibarRightButtonClick">+</text>
     </wxc-minibar>
+    <text class="title">正在进行
+    </text>
     <list @loadmore="fetch" loadmoreoffset="0">
       <cell v-for="(item, i) in todoLists" :key="i" @click="click(item, i)">
+        <div class="panel">
+          <text class="text">{{item}}</text>
+        </div>
+      </cell>
+    </list>
+    <text class="title">已经完成
+    </text>
+    <list @loadmore="fetch" loadmoreoffset="0">
+      <cell v-for="(item, i) in finishedLists" :key="i" @click="click(item, i)">
         <div class="panel">
           <text class="text">{{item}}</text>
         </div>
@@ -34,6 +45,10 @@
   }
   .add {
     font-size: 60px;
+  }
+  .title {
+    font-size: 48px;
+    font-weight: bold;
   }
   .panel {
     /* width: 600px; */
@@ -88,8 +103,10 @@ export default {
       this.todoLists.splice(i, 1)
     },
     minibarRightButtonClick () {
-      this.todoLists.push(this.txtInput)
-      modal.toast({ 'message': '添加成功!', 'duration': 1 })
+      if (this.txtInput) {
+        this.todoLists.push(this.txtInput)
+        modal.toast({ 'message': '添加成功!', 'duration': 1 })
+      }
     },
     onInput (event) {
       this.txtInput = event.value
