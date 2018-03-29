@@ -14,8 +14,7 @@
             class="add"
             @click="minibarRightButtonClick">+</text>
     </wxc-minibar>
-    <text class="title">正在进行
-    </text>
+    <text class="title">正在进行</text>
     <list @loadmore="fetch" loadmoreoffset="0">
       <cell v-for="(item, i) in todoList" :key="i" @click="click(item, i)">
         <div class="panel">
@@ -23,8 +22,7 @@
         </div>
       </cell>
     </list>
-    <text class="title">已经完成
-    </text>
+    <text class="title">已经完成</text>
     <list @loadmore="fetch" loadmoreoffset="0">
       <cell v-for="(item, i) in finishedList" :key="i">
         <div class="panel">
@@ -48,6 +46,8 @@
   }
   .title {
     font-size: 48px;
+    padding-left: 20px;
+    padding-top: 20px;
     font-weight: bold;
   }
   .panel {
