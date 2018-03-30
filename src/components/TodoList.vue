@@ -119,8 +119,9 @@ export default {
     },
     minibarRightButtonClick () {
       if (this.txtInput) {
-        this.todoList.push(this.txtInput)
+        this.todoList.push( {title: this.txtInput, checked: false })
         modal.toast({ 'message': '添加成功!', 'duration': 1 })
+        this.txtInput = ""
       }
     },
     onInput (event) {
