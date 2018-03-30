@@ -47,6 +47,7 @@
     font-size: 60px;
   }
   .checkbox {
+    margin: 10px;
     width: 42px;
     height: 42px;
     background: chartreuse;
