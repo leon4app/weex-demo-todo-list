@@ -16,9 +16,10 @@
     </wxc-minibar>
     <text class="title">正在进行</text>
     <list @loadmore="fetch" loadmoreoffset="0">
-      <cell v-for="(item, i) in todoList" :key="i" @click="click(item, i)">
+      <cell v-for="(item, i) in todoList" :key="i" @click="cellClick(item, i)">
         <div class="panel">
-          <text class="text">{{item}}</text>
+          <div @click="itemCheck(item, i)" :class="['checkbox', { 'checkboxChecked' : item.checked }]"></div>
+          <text class="text">{{item.title}}</text>
         </div>
       </cell>
     </list>
@@ -26,7 +27,8 @@
     <list @loadmore="fetch" loadmoreoffset="0">
       <cell v-for="(item, i) in finishedList" :key="i">
         <div class="panel">
-          <text class="text">{{item}}</text>
+          <div @click="itemCheck(item, i)" :class="['checkbox', { 'checkboxChecked' : item.checked }]"></div>
+          <text class="text">{{item.title}}</text>
         </div>
       </cell>
     </list>
@@ -44,6 +46,14 @@
   .add {
     font-size: 60px;
   }
+  .checkbox {
+    width: 42px;
+    height: 42px;
+    background: chartreuse;
+  }
+  .checkboxChecked {
+    background: burlywood;
+  }
   .title {
     font-size: 48px;
     padding-left: 20px;
@@ -51,56 +61,61 @@
     font-weight: bold;
   }
   .panel {
-    /* width: 600px; */
     flex: 1;
-    /* height: 250px; */
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     border-width: 2px;
     border-style: solid;
     border-color: rgb(162, 217, 192);
-    background-color: rgba(162, 217, 192, 0.2);
   }
   .text {
+    flex: 1;
     font-size: 30px;
     text-align: center;
+    align-self: center;
     color: #41B883;
   }
 </style>
 
 <script>
-import { WxcMinibar } from 'weex-ui'
+import { WxcMinibar, WxcCheckbox } from 'weex-ui'
 const modal = weex.requireModule('modal')
-const LOADMORE_COUNT = 4
 
 export default {
-  components: { WxcMinibar },
+  components: { WxcMinibar, WxcCheckbox },
   data () {
     return {
       txtInput: '',
-      todoList: [1, 2, 3, 4, 5],
+      todoList: [
+        {title:1, checked: false},
+        {title:2, checked: false},
+        {title:3, checked: false},
+        {title:4, checked: false},
+        {title:5, checked: false},
+      ],
       finishedList: []
     }
   },
   methods: {
     fetch (event) {
-      // modal.toast({ message: 'loadmore', duration: 1 })
       setTimeout(() => {
-        // const length = this.todoList.length
-        // for (let i = length; i < length + LOADMORE_COUNT; ++i) {
-          // this.todoList.push(i + 1)
-        // }                                                                                          
       }, 800)
     },
-    click (item, i) {
-      modal.toast({ message: 'Good', duration: 1 })
-      this.finishedList.push(item)
-      this.todoList.splice(i, 1)
+    cellClick (item, i) {
+      // modal.toast({ message: 'Good', duration: 1 })
+      // this.finishedList.push(item)
+      // this.todoList.splice(i, 1)
+    },
+    itemCheck (item, i) {
+        modal.toast({ message: 'Good', duration: 1 })
+        this.todoList[i].checked = true
+        this.finishedList.push(item)
+        this.todoList.splice(i, 1)
     },
     minibarRightButtonClick () {
       if (this.txtInput) {
